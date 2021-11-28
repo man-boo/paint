@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        
+        
+    </head>
+
+    <body class="body_background" style="text-align: center;">
+    <h1>Paint</h1>
+
+    <canvas id="myCanvas" width="800" height="350"></canvas>
+    <br><br>
+    <span> Radius - </span> <input type="text" id="radius" value="20">
+    <span> Color - </span> <input type="text" id="color" value="Red">
+    <span> Width of the line - </span> <input stype="text" id="Width_of_the_line" value="2">
+
+    <br>
+    <br>
+
+    <button onclick="Clear_drawing();">Clear Area</button>
+    <script>
+        var mouseEvent ="empty"
+
+canvas = document.getElementById("myCanvas");
+ctx= canvas.getContext("2d");
+
+// color="Red";
+// Width_of_the_line= 2;
+
+
+
+canvas.addEventListener("mousedown",my_mousedown);
+
+function  my_mousedown(e){
+color= document.getElementById("color").value;
+Width_of_the_line= document.getElementById("Width_of_the_line").value;
+radius= document.getElementById("radius").value;
+mouseEvent="mousedown"
+}
+
+canvas.addEventListener("mousemove",my_mousemove);
+
+function my_mousemove(e){
+var current_position_of_mouse_X =e.clientX - canvas.offsetLeft;
+var current_position_of_mouse_Y =e.clientY - canvas.offsetTop;
+if(mouseEvent == "mousedown"){
+console.log("Current Position of X and Y Cooridinates = ")
+console.log("X = "+current_position_of_mouse_X+",Y = "+current_position_of_mouse_Y );
+
+ctx.beginPath();
+ctx.strokeStyle = color;
+ctx.lineWidth = Width_of_the_line;
+ctx.arc(current_position_of_mouse_X, current_position_of_mouse_Y, radius, 0, 2 * Math.PI);
+ctx.stroke();
+}
+}
+
+canvas.addEventListener("mouseleave",my_mouseleave);
+
+function my_mouseleave(e){
+mouseEvent="mouseleave";
+}
+function Clear_drawing(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+    </script>
+    </body>
+</html>  
